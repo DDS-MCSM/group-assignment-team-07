@@ -6,6 +6,9 @@ Group Assignment base repository for the Data Driven Security subject of the [Cy
 
 Brief description of the project.
 
+El objetivo de este proyecto es encontrar los dominios ilegítimos con los que poder suplantar la identidad de un dominio legítimo. Con los datos recogidos en este proyecto se podrá obtener información sobre qué dominios ilegítimos estan siendo utilizados y cuales no.
+
+
 ### Requirements
 
   - Requirement 1
@@ -31,7 +34,8 @@ Description of the project.
 
 ~~~~
 word=input("digita el dominio: ")
-letters = 'abcdefghijklmnopqrstuvwxyz01'
+# letters = 'abcdefghijklmnopqrstuvwxyz01'
+letters = '4iIl0o1uvbdpq'
 splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]
 deletes = [L + R[1:] for L, R in splits if R]
 transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R)>1]
