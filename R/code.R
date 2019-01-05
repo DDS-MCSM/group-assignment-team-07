@@ -50,4 +50,39 @@ sample_function <- function() {
 #   }
 #
 # }
+domain <- "amazon.com"
+url <- paste("https://www.sslshopper.com/assets/snippets/sslshopper/ajax/ajax_check_ssl.php?hostname=", domain, "&g-recaptcha-response=&rand=190", sep = "")
+htmlpage <- GET(url, add_headers("X-Requested-With" = "XMLHttpRequest"))
+html <- read_html(htmlpage)
+
+domain_resolves <- !identical(xml_text(xml_find_all(html, "//table[1]/tr[1]/td[1][contains(@class, 'passed')]")),character(0))
+if (domain_resolves) {
+  #has certificate?
+  has_certificate <- !identical(xml_text(xml_find_all(html, "//table[contains(@class, 'checker_certs')]")),character(0))
+  if (has_certificate) {
+    #Get cert info
+    has_organization_field <- (xml_text(xml_find_all(html,"//table[2]/tr[1]/td[2]/b[3]")) == "Organization:")
+    if (has_organization_field) {
+      organization <- xml_text(xml_find_all(html,"//table[2]/tr[1]/td[2]/descendant::text()[6]"))
+      }
+  } else {
+    #No certificate
+  }
+} else {
+  #don't resolve
+}
+
+# else {
+#   #resolves
+#
+#   if (identical(xml_text(xml_find_all(html, "//table[1]/tr[3]/td[1][contains(@class, 'failed')]/following-sibling::td[1]/h3[1]")),character(0))) {
+#     #Has no server type and no certificate
+#   }
+#   has_server_type <- startsWith(xml_text(xml_find_all(html, "//table[1]/tr[3]/td[1][contains(@class, 'passed')]/following-sibling::td[1]/h3[1]")),"Server Type:")
+#   if (has_server_type & !has_certificate) {
+#     #Has server type
+#   }
+# }
+
+
 
