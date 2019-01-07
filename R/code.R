@@ -51,20 +51,31 @@ sample_function <- function() {
 #
 # }
 domain <- "amazon.com"
-url <- paste("https://www.sslshopper.com/assets/snippets/sslshopper/ajax/ajax_check_ssl.php?hostname=", domain, "&g-recaptcha-response=&rand=190", sep = "")
-htmlpage <- GET(url, add_headers("X-Requested-With" = "XMLHttpRequest"))
-html <- read_html(htmlpage)
+sslshopper_url <- paste("https://www.sslshopper.com/assets/snippets/sslshopper/ajax/ajax_check_ssl.php?hostname=", domain, "&g-recaptcha-response=&rand=190", sep = "")
+sslshopper_htmlpage <- GET(sslshopper_url, add_headers("X-Requested-With" = "XMLHttpRequest"))
+sslshopper_html <- read_html(htsslshopper_htmlpage)
 
-domain_resolves <- !identical(xml_text(xml_find_all(html, "//table[1]/tr[1]/td[1][contains(@class, 'passed')]")),character(0))
+domain_resolves <- !identical(xml_text(xml_find_all(sslshopper_html, "//table[1]/tr[1]/td[1][contains(@class, 'passed')]")),character(0))
 if (domain_resolves) {
   #has certificate?
-  has_certificate <- !identical(xml_text(xml_find_all(html, "//table[contains(@class, 'checker_certs')]")),character(0))
+  has_certificate <- !identical(xml_text(xml_find_all(sslshopper_html, "//table[contains(@class, 'checker_certs')]")),character(0))
   if (has_certificate) {
     #Get cert info
-    has_organization_field <- (xml_text(xml_find_all(html,"//table[2]/tr[1]/td[2]/b[3]")) == "Organization:")
+    has_organization_field <- (xml_text(xml_find_all(sslshopper_html,"//table[2]/tr[1]/td[2]/b[3]")) == "Organization:")
     if (has_organization_field) {
-      organization <- xml_text(xml_find_all(html,"//table[2]/tr[1]/td[2]/descendant::text()[6]"))
+      organization <- xml_text(xml_find_all(sslshopper_html,"//table[2]/tr[1]/td[2]/descendant::text()[6]"))
+    }
+    else{
+      #don't have organization field -> get organization from https://www.ultratools.com/tools/ipWhoisLookupResult with ip
+      ultratools_url <- "https://www.ultratools.com/tools/ipWhoisLookupResult"
+      ultratools_htmlpage <- httr::POST(ultratools_url,add_headers("Content-Type" = "application/x-www-form-urlencoded"), body = "ipAddress=40.113.200.201")
+      ultratools_html <- read_html(ultratools_htmlpage)
+      organization <- xml_text(xml_find_all(ultratools_html,"//div[contains(./span,'Org:')]/span[2]"))
+      if (identical(organization,character(0))){
+        organization <- "None"
       }
+    }
+    #Compare organization field with the legitimate one
   } else {
     #No certificate
   }
