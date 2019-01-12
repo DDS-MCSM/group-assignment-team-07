@@ -11,13 +11,72 @@ sample_function <- function() {
 library("xml2")
 library("httr")
 library("reticulate")
+library("curl")
+library("magrittr")
+
+existing_domains <<- data.frame(Testing = character(), Has_certificate = logical() , Organization = character())
+non_existing_domains <<- list()
+reliable_organization <<- ""
+
+domain_exists <- function(domain_to_check){
+  tryCatch({
+    print(paste("Checking if ", domain_to_check, " exists..." ,sep = ""))
+    response <- GET(domain_to_check, timeout(5))
+    return(TRUE)
+  },
+  error = function(err){
+    print(err)
+    return(FALSE)
+  })
+}
+
+main <- function(domain){
+
+  #Get reliable domain data (Organiation)
+  if (!domain_exists(domain)) {
+    stop()
+  }
+  # Get Organization from the certificate
+  sslshopper_url <- paste("https://www.sslshopper.com/assets/snippets/sslshopper/ajax/ajax_check_ssl.php?hostname=", domain, "&g-recaptcha-response=&rand=190", sep = "")
+  sslshopper_htmlpage <- GET(sslshopper_url, add_headers("X-Requested-With" = "XMLHttpRequest"))
+  df <- get_organization_certificate_info(sslshopper_htmlpage)
+  reliable_organization <<- df$Organization
+
+  #get similar domains list
+  source_python("/home/test/Master/DDS/group-assignment-team-07/python_scripts/edit_domain.py")
+  similar_domains <- edit_domain(domain)
+
+  pool <- new_pool()
+  cb <- function(req){
+    print("Entered done function")
+    existing_domains <<- rbind(existing_domains, get_organization_certificate_info(req$content))
+    print(existing_domains)
+  }
+
+  # Getting data from every similar domain
+  for (i in 1:length(similar_domains)) {
+    if (domain_exists(similar_domains[i])) {
+      curl_fetch_multi(paste("https://www.sslshopper.com/assets/snippets/sslshopper/ajax/ajax_check_ssl.php?hostname=", similar_domains[i], "&g-recaptcha-response=&rand=190", sep = ""),pool = pool, handle = new_handle() %>% handle_setheaders("X-Requested-With" = "XMLHttpRequest"), done = cb)
+    } else {
+      non_existing_domains <<- c(non_existing_domains, similar_domains[i])
+    }
+  }
+   out <- multi_run(pool = pool)
+   out
+}
+
+
+## FUNCTION get_sslshopper certficate info -----------------------------------------------------
 
 get_organization_certificate_info <- function(response){
   organization <- "None"
   sslshopper_html <- read_html(response)
 
-  domain_resolves <- !identical(xml_text(xml_find_all(sslshopper_html, "//table[1]/tr[1]/td[1][contains(@class, 'passed')]")),character(0))
-  if (domain_resolves) {
+  resolve_text <- xml_text(xml_find_all(sslshopper_html, "//h3[contains(.,'resolves')]"))
+  html_domain <- regmatches(resolve_text, gregexpr("^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.[a-zA-Z]{2,}",resolve_text))[[1]] # Desde cuan s'accedeix aixi a una llista?????????????????? WTF
+
+  print(paste("Looking for ", html_domain," organization", sep = ""))
+
     #has certificate?
     has_certificate <- !identical(xml_text(xml_find_all(sslshopper_html, "//table[contains(@class, 'checker_certs')]")),character(0))
     if (has_certificate) {
@@ -28,46 +87,23 @@ get_organization_certificate_info <- function(response){
       }
       else{
         #don't have organization field -> get organization from https://www.ultratools.com/tools/ipWhoisLookupResult with ip
+        resolve_text <- xml_text(xml_find_all(sslshopper_html, "//h3[contains(.,'resolves')]"))
+        domain_ip <- regmatches(resolve_text, gregexpr("\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b",resolve_text))[1]
         ultratools_url <- "https://www.ultratools.com/tools/ipWhoisLookupResult"
-        ultratools_htmlpage <- httr::POST(ultratools_url,add_headers("Content-Type" = "application/x-www-form-urlencoded"), body = "ipAddress=40.113.200.201")
+        ultratools_htmlpage <- httr::POST(ultratools_url,add_headers("Content-Type" = "application/x-www-form-urlencoded"), body = paste("ipAddress=",domain_ip, sep = ""))
         ultratools_html <- read_html(ultratools_htmlpage)
         organization <- xml_text(xml_find_all(ultratools_html,"//div[contains(./span,'Org:')]/span[2]"))
         if (identical(organization,character(0))) {
           organization <- "None"
         }
       }
-      #Compare organization field with the legitimate one
     } else {
       #No certificate
     }
-  } else {
-    #don't resolve
-  }
-  return(organization)
-}
+    result <- data.frame(Testing = html_domain, Has_certificate = has_certificate, Organization = organization)
 
-
-main <- function(domain){
-  domains_with_certificate <- ""
-  domains_without_certificate <- ""
-  non_existing_domains <- ""
-  results <- character(0)
-  #Get reliable domain data (Organiation)
-  sslshopper_url <- paste("https://www.sslshopper.com/assets/snippets/sslshopper/ajax/ajax_check_ssl.php?hostname=", domain, "&g-recaptcha-response=&rand=190", sep = "")
-  sslshopper_htmlpage <- GET(sslshopper_url, add_headers("X-Requested-With" = "XMLHttpRequest"))
-  organization <- get_organization_certificate_info(domain)
-
-  #get similar domains list
-  source_python("/home/test/Master/DDS/group-assignment-team-07/python_scripts/edit_domain.py")
-  similar_domains <- edit_domain(domain)
-
-  #get similar domains data (Organiation) and compare it with legitimate domain
-  pool <- new_pool()
-  cb <- function(req){ results <- c(results,get_organization_certificate_info(req$content))}
-  for (i in 1:length(similar_domains)) {
-    curl_fetch_multi("https://www.sslshopper.com/assets/snippets/sslshopper/ajax/ajax_check_ssl.php?hostname=" + similar_domains[i] + "&g-recaptcha-response=&rand=190",pool = pool, handle = new_handle() %>% handle_setheaders("X-Requested-With" = "XMLHttpRequest"), done = cb)
-  }
-  out <- multi_run(pool = pool)
+    print(result)
+  return(result)
 }
 
 
