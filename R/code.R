@@ -128,6 +128,27 @@ draw_pie <- function(df) {
   not_resolving_domains <- as.data.frame(df %>% filter(Resolves == FALSE) %>% count())[[1]]
   print(not_resolving_domains)
 
+
+  pie(x=c(not_resolving_domains),labels="", radius=1 , col=c("#cc0000"), main = "Some main")
+  text(0, 1, "init.angle = 90", col = "red")
+  par(new=TRUE)
+  r1 <- 1-(not_resolving_domains/number_of_domanis)
+  pie(x=c(not_reliable_without_certificate_domains),radius=(r1),
+      col=c("#e59400"))
+
+
+  r2 <- r1-(not_reliable_without_certificate_domains/number_of_domanis)
+  par(new=TRUE)
+  pie(x=c(not_reliable_certificate_domains),radius=(r2),
+      col=c("#e5e500"))
+
+  r3 <- r2 - (not_reliable_certificate_domains/number_of_domanis)
+  par(new=TRUE)
+  pie(x=c(reliable_domains),radius=(r3),
+      col=c("#198c19"))
+
+  legend(1, .4, c("DH"), cex = 1, fill = c("#198c19"))
+
   y1_2 <- 1 - (not_resolving_domains/number_of_domanis)
   y1_1 <- (not_resolving_domains/number_of_domanis)
   y2_2 <- y1_2 - (not_reliable_without_certificate_domains/number_of_domanis)
@@ -139,11 +160,10 @@ draw_pie <- function(df) {
 
 
   plot_ly(df,labels = c("not_resolving_domains"), values = c(not_resolving_domains),
-          showlegend = FALSE,
-          name = "Continent Data0"
-  ) %>%
+          showlegend = TRUE,
+          name = "Continent Data0") %>%
 
-    add_pie(hole = 0.6,
+    add_pie(hole = 0,
             textinfo = 'label',
             textposition = 'inside',
             insidetextfont = list(color = '#FFFFFF'),
@@ -161,7 +181,7 @@ draw_pie <- function(df) {
             sort = FALSE,
             name = "Continent Data1",
             marker = list(line = list(color = '#FFFFFF', width = 1)),
-            domain = list(x = c(.2, 0.8), y = c(y1_1,y1_2))) %>%
+            domain = list(x = c(0,1), y = c(y1_1,y1_2))) %>%
 
     add_pie(df,labels = c("not_reliable_certificate_domains"), values = c(not_reliable_certificate_domains),
             textinfo = 'label',
@@ -172,43 +192,20 @@ draw_pie <- function(df) {
             marker = list(line = list(color = '#FFFFFF', width = 1)),
             domain = list(x = c(.2, 0.8), y = c(y2_1,y2_2))) %>%
 
-    # add_pie(df,labels = c("Reliable domains"), values = c(1),
-    #         textinfo = 'label',
-    #         textposition = 'inside',
-    #         direction = 'clockwise',
-    #         sort = FALSE,
-    #         name = "Continent Data1",
-    #         marker = list(line = list(color = '#FFFFFF', width = 1)),
-    #         domain = list(x = c(.2, 0.8), y = c(y3_1,y3_2))) %>%
+    add_pie(df,labels = c("Reliable domains"), values = c(reliable_domains),
+            textinfo = 'label',
+            textposition = 'inside',
+            direction = 'clockwise',
+            sort = FALSE,
+            name = "Continent Data1",
+            marker = list(line = list(color = '#FFFFFF', width = 1)),
+            domain = list(x = c(.2, 0.8), y = c(y3_1,y3_2))) %>%
 
 
-    config(collaborate = FALSE, displaylogo = FALSE ) %>%
+    config(collaborate = TRUE, displaylogo = TRUE ) %>%
 
     layout(title = "Band Locations",
-           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-           yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-           autosize = FALSE)
-
-  # pie(x=c(1),labels=, radius=1 , col=c("#cc0000"), main = "Some main")
-  #
-  #
-  # par(new=TRUE)
-  # y1_2 <- 1-(not_resolving_domains/number_of_domanis)
-  # y1_1 <- not_resolving_domains/number_of_domanis
-  # pie(x=c(1),radius=(r1),
-  #     col=c("#e59400"))
-  #
-  # y2_2 <- y1_2-(not_reliable_without_certificate_domains/number_of_domanis)
-  # y2_1 <- y1_1 + (not_reliable_without_certificate_domains/number_of_domanis)
-  # par(new=TRUE)
-  # pie(x=c(1),radius=(r2),
-  #     col=c("#e5e500"))
-  #
-  # y3_2 <- y2_2 - (not_reliable_certificate_domains/number_of_domanis)
-  # y3_1 <- y2_1 + (not_reliable_certificate_domains/number_of_domanis)
-  # par(new=TRUE)
-  # pie(x=c(1),radius=(r3),
-  #     col=c("#198c19"))
-  #
-  # legend(1, .4, c("DH"), cex = 1, fill = c("#198c19"))
+           xaxis = list(showgrid = TRUE, zeroline = TRUE, showticklabels = TRUE),
+           yaxis = list(showgrid = TRUE, zeroline = TRUE, showticklabels = TRUE),
+           autosize = TRUE)
 }
