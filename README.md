@@ -43,12 +43,12 @@ Una vez en el sitio web del typosquatter, el usuario puede ser engañado para qu
 
 Hay muchas diferentes razones por las que un typosquatter pueda llegar a utilizar esta clase de engaño:
 
-•	Para vender el dominio con el error ortográfico al dueño del sitio web que imita.
-•	Para monetizar el dominio a través de publicidad.
-•	Para redirigir el sitio web con el error tipográfico a un competidor.
-•	Como un esquema de phishing con el fin de robar contraseñas, correos electrónicos, tarjetas de crédito o información personal.
-•	Para instalar malware o generadores de ganancia adware en los dispositivos de los visitantes.
-•	Para expresar una opinión diferente de la que el sitio web verdadero pretende.
+- Para vender el dominio con el error ortográfico al dueño del sitio web que imita.
+- Para monetizar el dominio a través de publicidad.
+- Para redirigir el sitio web con el error tipográfico a un competidor.
+- Como un esquema de phishing con el fin de robar contraseñas, correos electrónicos, tarjetas de crédito o información personal.
+- Para instalar malware o generadores de ganancia adware en los dispositivos de los visitantes.
+- Para expresar una opinión diferente de la que el sitio web verdadero pretende.
 
 Ejemplos
 
