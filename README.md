@@ -87,14 +87,24 @@ Por lo tanto, la compatibilidad del navegador significa que el certificado que u
 
 ¿Cuántos nombres de dominio puedo asegurar?
 
-La mayoría de los certificados de servidor SSL solo asegurarán un único nombre de dominio o subdominio. Por ejemplo, un certificado podría asegurar www.yourdomain.com o mail.yourdomain.com pero no ambos. El certificado seguirá funcionando con un nombre de dominio diferente, pero el navegador web dará un error cada vez que vea que la dirección en la barra de direcciones no coincide con el nombre de dominio (llamado un nombre común) en el certificado. Si necesita proteger varios subdominios en un solo nombre de dominio, puede comprar un certificado comodín. Para un certificado comodín, un nombre común de * .yourdomain.com aseguraría www.yourdomain.com, mail.yourdomain.com, secure.yourdomain.com, etc ... También hay certificados especiales como Unified Communications (UC) Certificados que pueden asegurar varios nombres de dominio diferentes en un certificado.
+La mayoría de los certificados de servidor SSL solo asegurarán un único nombre de dominio o subdominio. Por ejemplo, un certificado podría asegurar www.youdomain.com o mail.yourdomain.com pero no ambos. El certificado seguirá funcionando con un nombre de dominio diferente, pero el navegador web dará un error cada vez que vea que la dirección en la barra de direcciones no coincide con el nombre de dominio (llamado un nombre común) en el certificado. Si necesita proteger varios subdominios en un solo nombre de dominio, puede comprar un certificado comodín. Para un certificado comodín, un nombre común de * .yourdomain.com aseguraría www.yourdomain.com, mail.yourdomain.com, secure.yourdomain.com, etc ... También hay certificados especiales como Unified Communications (UC) Certificados que pueden asegurar varios nombres de dominio diferentes en un certificado.
 
 ¿Qué es un sello de confianza?
 
 Un sello de confianza es un logotipo que puede mostrar en su sitio web y que verifica que un proveedor de certificados en particular lo ha validado y está utilizando su certificado SSL para proteger su sitio. Se puede mostrar en páginas seguras y no seguras y es más apropiado en páginas donde los clientes están por ingresar su información personal, como una página de carrito de la compra, pero se pueden mostrar en cada página para ayudar a generar confianza. El sello de confianza de cada autoridad de certificación es diferente y algunos parecen más profesionales, por lo que debe considerar cómo se ve el sello para maximizar la confianza del cliente. Para obtener más información sobre Trust Seals, lea Gain Trust Online con Trust Seals.
 
 
-### Goals
+### Objetivos
+
+Para la realización del proyecto ANTI-TYPOSQUATTING, hemos trazado dos tipos de objetivos, que serán los objetivos técnicos y los objetivos fundamentado en el Análisis avanzado de Datos. Ambos objetivos enfocados en la ciberseguridad.
+
+Objetivos Técnicos:
+
+-	Realizar un análisis sobre las posibilidades que posee la mente criminal para utilizar nombres de dominio, para el diseño, desarrollo o adopción de un algoritmo que permite generar variaciones de dominio cercanas a los dominós que un ser humano podría utilizar para realizar Phishing.
+-	Identificar los métodos, funciones, productos o servicios que permitan evaluar o extraer información sobre la propiedad de los dominios, la autoridad certificadora y la disponibilidad de estos.
+-	Desarrollar un conjunto de funciones que permita integrar el algoritmo desarrollado preliminarmente con las fuentes heterogéneas que puedan realizar la validación de confianza de los dominios de interés.
+
+Objetivos de Análisis de Datos:
 
 ### Data acquisition
 
