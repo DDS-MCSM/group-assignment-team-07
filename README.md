@@ -128,7 +128,7 @@ Si el dominio posee certificado y el propietario del dominio generado es diferen
 
 - Caso # 3
 
-Si el dominio posee certificado y pero no se puede obtener información sobre el propietario de dicho certificado , hacemos uso de otra fuente de validación diferente, a través del sitio web https://www.ultratools.com/tools/ipWhoisLookupResult ,este sitio web nos será de utilidad para validar este tipo de casos, consultamos su IP y si el propietarios de dicha IP es el mimos propietario del dominio original, en este caso se considera riesgo bajo.
+Si el dominio posee certificado pero no se puede obtener información sobre el propietario de dicho certificado , hacemos uso de otra fuente de validación diferente, a través del sitio web https://www.ultratools.com/tools/ipWhoisLookupResult ,este sitio web nos será de utilidad para validar este tipo de casos, consultamos su IP y si el propietarios de dicha IP es el mimos propietario del dominio original, en este caso se considera riesgo bajo.
 
 - Caso # 4
 
