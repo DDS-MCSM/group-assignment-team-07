@@ -143,11 +143,11 @@ Por ultimo si el dominio no posee certificado y su IP asociada no tiene un propi
 
 ### Results / Conclusions.
 
-Tras obtener los datos y clasificarlos según el tipo de dominio, se muestra una grafica con la que analizar los datos finales. Esta grafica representa el peligro al que se enfrenta un dominio de ser splantado por otro parecido.
+Tras obtener los datos y clasificarlos según el tipo de dominio, se muestra una gráfica con la que analizar los datos finales. Esta gráfica representa el peligro al que se enfrenta un dominio de ser suplantado por otro parecido.
 
 ![alt text](https://github.com/DDS-MCSM/group-assignment-team-07/blob/master/vignettes/Rplot.png)
 
-Como se puede observar en la grafica anterior, el circulo verde (que contiene los dominios de confianza que pertenecen a la misma organizaion) esta rodeado por 3 circulos de color amarillo, naranja y rojo. El circulo rojo (el mas peligroso) esta formado por los dominios que no teienen ip asociada, por lo que un atacante podria comprar el dominio para suplantar al dominio confiable. El circulo naranja esta formado por los dominios que sí tienen ip asociada pero no tienen certificado. Estos no son tan peligrosos ya que se supone que contienen servicios fiables, y si no, son dominios conocidos por no contener información de interés. Finalmente, el color amarillo esta formado por los dominios parecidos que tienen un certificado vàlido que no es el del dominio legítímo. Este último no supone demiasiado peligro, ya que gracias al certificado se puede validar la autenticidad del sitio.
+Como se puede observar en la gráfica anterior, el circulo verde (que contiene los dominios de confianza que pertenecen a la misma organizaion) esta rodeado por 3 círculos de color amarillo, naranja y rojo. El circulo rojo (el mas peligroso) esta formado por los dominios que no tienen ip asociada, por lo que un atacante podría comprar el dominio para suplantar al dominio confiable. El circulo naranja esta formado por los dominios que sí tienen ip asociada pero no tienen certificado. Estos no son tan peligrosos ya que se supone que contienen servicios fiables, y si no, son dominios conocidos por no contener información de interés. Finalmente, el color amarillo esta formado por los dominios parecidos que tienen un certificado valido que no es el del dominio legitimo. Este último no supone demasiado peligro, ya que gracias al certificado se puede validar la autenticidad del sitio.
 
 
 ~~~~
