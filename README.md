@@ -22,9 +22,10 @@ Los requerimientos clave para ejecución del presente proyecto son:
 
   
   
-### Project Description
+### Descripción del proyecto
 
-Description of the project. 
+El proyecto ANTI-TYPOSQUATTING, es la implementación de un control básico para la prevención del método de ataque cibernético Phishing, pero con un ingrediente importante que es el análisis avanzado de la información de sitios de dominio que aportaran utilidad a las estrategias de Ciberseguridad de las empresas.
+
 
 ### Goals
 
