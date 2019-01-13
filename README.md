@@ -113,10 +113,13 @@ Objetivos de Análisis de Datos:
 
 ### Adquisición de datos
 
-A continuación, veremos las diferentes tipificaciones, fuentes heterogéneas, casuísticas que podrían aplicarse y se han establecido gracias al producto del análisis realizado:
+Tomamos la muestra de un nombre de dominio conocido o de interés para el cual deseamos aplicar el presente proyecto, en este caso será el nombre de dominio que queremos auditar. Para esto y después de un análisis de las diferentes soluciones web que nos permiten tener información completa ,en la mayoría de los casos, hemos seleccionado el sitio https://www.sslshopper.com , este sitio web permite extraer información clave sobre el certificado y el propietario del dominio web, para el presente proyecto será relevante el nombre de la organización propietaria,  ya que será la llave primaria para establecer cuando un nombre de dominio es o no de un propietario de confianza o del mismo propietario dueño del dominio principal en mención. Después de extraer la información relevante sobre el certificado del dominio, se aplicará el algoritmo desarrollado para poder generar variaciones del dominio tal y como lo haría un criminal cibernético.
 
-Etapa inicial 
-Tomamos la muestra de un nombre de dominio conocido o de interés para el cual deseamos aplicar el presente proyecto, en este caso será el nombre de dominio que queremos proteger. Para esto y después de un análisis de las diferentes soluciones web que nos permiten tener información completa ,en la mayoría de los casos, hemos seleccionado el sitio https://www.sslshopper.com , este sitio web permite extraer información clave sobre el certificado y el propietario del dominio web, para el presente proyecto será relevante el nombre de la organización propietaria,  ya que será la llave primaria para establecer cuando un nombre de dominio es o no de un propietario de confianza o del mismo propietario dueño del dominio principal en mención. Después de extraer la información relevante sobre el certificado del dominio, se aplicará el algoritmo desarrollado para poder generar variaciones del dominio tal y como lo haría un criminal cibernético.
+### Cleansing and transformations
+
+### Data analysis
+
+Para analizar los datos, se han seguido diversas casuísticas para clasificar la información del certificado obtenido de cada dominio. Cada dominio se ha podido clasificar en una de estas maneras:
 
 - Caso # 1
 
@@ -138,12 +141,13 @@ Si el dominio posee certificado y pero no se puede obtener información sobre el
 
 Por ultimo si el dominio no posee certificado y su IP asociada no tiene un propietario se considera de un riesgo muy Alto y cualquier persona podría utilizar dicho dominio para llevar a cabo una Phishing o uno de sus métodos variantes.
 
-### Cleansing and transformations
-
-### Data analysis
-
 ### Results / Conclusions.
 
+Tras obtener los datos y clasificarlos según el tipo de dominio, se muestra una grafica con la que analizar los datos finales. Esta grafica representa el peligro al que se enfrenta un dominio de ser splantado por otro parecido.
+
+![alt text](https://github.com/DDS-MCSM/group-assignment-team-07/blob/master/vignettes/Rplot.png)
+
+Como se puede observar en la grafica anterior, el circulo verde (que contiene los dominios de confianza que pertenecen a la misma organizaion) esta rodeado por 3 circulos de color amarillo, naranja y rojo. El circulo rojo (el mas peligroso) esta formado por los dominios que no teienen ip asociada, por lo que un atacante podria comprar el dominio para suplantar al dominio confiable. El circulo naranja esta formado por los dominios que sí tienen ip asociada pero no tienen certificado. Estos no son tan peligrosos ya que se supone que contienen servicios fiables, y si no, son dominios conocidos por no contener información de interés. Finalmente, el color amarillo esta formado por los dominios parecidos que tienen un certificado vàlido que no es el del dominio legítímo. Este último no supone demiasiado peligro, ya que gracias al certificado se puede validar la autenticidad del sitio.
 
 
 ~~~~
