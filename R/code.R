@@ -93,7 +93,7 @@ get_organization_certificate_info <- function(response, known_as_reliable){
   sslshopper_html <- read_html(response)
 
   resolve_text <- xml_text(xml_find_all(sslshopper_html, "//h3[contains(.,'resolves')]"))
-  html_domain <- regmatches(resolve_text, gregexpr("^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.[a-zA-Z]{2,}",resolve_text))[[1]] # Desde cuan s'accedeix aixi a una llista?????????????????? WTF
+  html_domain <- regmatches(resolve_text, gregexpr("^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.[a-zA-Z]{2,}",resolve_text))[[1]]
 
   print(paste("Looking for ", html_domain," organization", sep = ""))
 
@@ -149,7 +149,7 @@ draw_pie <- function(df) {
   print(not_resolving_domains)
 
 
-  pie(x=not_resolving_domains,labels=not_resolving_domains, radius=1 , col=c("#cc0000"), main = "Some main")
+  pie(x=not_resolving_domains,labels=not_resolving_domains, radius=1 , col=c("#cc0000"), main = "Results")
 
   par(new=TRUE)
 
