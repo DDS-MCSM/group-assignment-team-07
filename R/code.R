@@ -113,25 +113,102 @@ get_organization_certificate_info <- function(response, known_as_reliable){
 
 draw_pie <- function(df) {
 
+  number_of_domanis = nrow(df)
   # Reliable domains, with a correct certificate and Organization == Reliable Organization
-  reliability_domains <- (df %>% filter(Is_reliable == TRUE) %>% count())[[1]]
-  print(reliability_domains)
+  reliable_domains <- (df %>% filter(Is_reliable == TRUE) %>% count())[[1]]
+  print(reliable_domains)
   # Not Reliable domains with certificate of organization != Reliable organization
   not_reliable_certificate_domains <- (df %>% filter(Has_certificate == TRUE & Is_reliable == FALSE) %>% count())[[1]]
-  print(not_reliable_certificate)
+  print(not_reliable_certificate_domains)
   # Not Reliable domains wothout certificate that resolves
 
   not_reliable_without_certificate_domains <- (df %>% filter(Has_certificate == FALSE & Is_reliable == FALSE & Resolves == TRUE) %>% count())[[1]]
-  print(not_reliable_without_certificate)
+  print(not_reliable_without_certificate_domains)
   # Not resolving domains
-  not_resolving_domains <- as.data.frame(df %>% filter(Resolves == FALSE) %>% count())
-  print(resolves_df)
-  pie(x=c(14,22,15,3,15,33,0,6,45),labels="",
-      col=c("#f21c39","#dba814","#7309de"))
-  par(new=TRUE)
-  pie(x=c(1),labels=c("Peligro"),radius=0.6,
-      col=c("#f21c39"))
-  par(new=TRUE)
-  pie(x=c(10,0),labels=c(".","Todo bien"),radius=0.3,
-      col=c("#7309de","#7309de"))
+  not_resolving_domains <- as.data.frame(df %>% filter(Resolves == FALSE) %>% count())[[1]]
+  print(not_resolving_domains)
+
+  y1_2 <- 1 - (not_resolving_domains/number_of_domanis)
+  y1_1 <- (not_resolving_domains/number_of_domanis)
+  y2_2 <- y1_2 - (not_reliable_without_certificate_domains/number_of_domanis)
+  y2_1 <- y1_1 + (not_reliable_without_certificate_domains/number_of_domanis)
+  y3_2 <- y2_2 - (not_reliable_certificate_domains/number_of_domanis)
+  y3_1 <- y2_1 + (not_reliable_certificate_domains/number_of_domanis)
+  y4_2 <- y3_2 - (reliable_domains/number_of_domanis)
+  y4_1 <- y3_1 + (reliable_domains/number_of_domanis)
+
+
+  plot_ly(df,labels = c("not_resolving_domains"), values = c(not_resolving_domains),
+          showlegend = FALSE,
+          name = "Continent Data0"
+  ) %>%
+
+    add_pie(hole = 0.6,
+            textinfo = 'label',
+            textposition = 'inside',
+            insidetextfont = list(color = '#FFFFFF'),
+            marker = list(line = list(color = '#FFFFFF', width = 1)),
+            direction = 'clockwise',
+            sort = FALSE,
+            text = ~paste(c("not_resolving_domains"), c(not_resolving_domains)),
+            hoverinfo = 'text + percent') %>%
+
+
+    add_pie(df,labels = c("not_reliable_without_certificate_domains"), values = c(not_reliable_without_certificate_domains),
+            textinfo = 'label',
+            textposition = 'inside',
+            direction = 'clockwise',
+            sort = FALSE,
+            name = "Continent Data1",
+            marker = list(line = list(color = '#FFFFFF', width = 1)),
+            domain = list(x = c(.2, 0.8), y = c(y1_1,y1_2))) %>%
+
+    add_pie(df,labels = c("not_reliable_certificate_domains"), values = c(not_reliable_certificate_domains),
+            textinfo = 'label',
+            textposition = 'inside',
+            direction = 'clockwise',
+            sort = FALSE,
+            name = "Continent Data1",
+            marker = list(line = list(color = '#FFFFFF', width = 1)),
+            domain = list(x = c(.2, 0.8), y = c(y2_1,y2_2))) %>%
+
+    # add_pie(df,labels = c("Reliable domains"), values = c(1),
+    #         textinfo = 'label',
+    #         textposition = 'inside',
+    #         direction = 'clockwise',
+    #         sort = FALSE,
+    #         name = "Continent Data1",
+    #         marker = list(line = list(color = '#FFFFFF', width = 1)),
+    #         domain = list(x = c(.2, 0.8), y = c(y3_1,y3_2))) %>%
+
+
+    config(collaborate = FALSE, displaylogo = FALSE ) %>%
+
+    layout(title = "Band Locations",
+           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+           yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+           autosize = FALSE)
+
+  # pie(x=c(1),labels=, radius=1 , col=c("#cc0000"), main = "Some main")
+  #
+  #
+  # par(new=TRUE)
+  # y1_2 <- 1-(not_resolving_domains/number_of_domanis)
+  # y1_1 <- not_resolving_domains/number_of_domanis
+  # pie(x=c(1),radius=(r1),
+  #     col=c("#e59400"))
+  #
+  # y2_2 <- y1_2-(not_reliable_without_certificate_domains/number_of_domanis)
+  # y2_1 <- y1_1 + (not_reliable_without_certificate_domains/number_of_domanis)
+  # par(new=TRUE)
+  # pie(x=c(1),radius=(r2),
+  #     col=c("#e5e500"))
+  #
+  # y3_2 <- y2_2 - (not_reliable_certificate_domains/number_of_domanis)
+  # y3_1 <- y2_1 + (not_reliable_certificate_domains/number_of_domanis)
+  # par(new=TRUE)
+  # pie(x=c(1),radius=(r3),
+  #     col=c("#198c19"))
+  #
+  # legend(1, .4, c("DH"), cex = 1, fill = c("#198c19"))
 }
