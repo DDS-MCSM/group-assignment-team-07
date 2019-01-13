@@ -33,11 +33,11 @@ Typosquatting, también conocido como URL hijacking, sting site, o fake URL. Es 
 
 La URL de los sitios web de cybersquatters usualmente sigue una de estas cinco variaciones:
 
-1.	Un error ortográfico o una pronunciación extranjera de la URL. Ejemplo: ejemple.com
-2.	Un error tipográfico. ejemlop.com
-3.	Una URL expresada diferente. ejemplos.com
-4.	Un TLD diferente. ejemplo.org
-5.	Un ccTLD diferente. ejemplo.co
+- Un error ortográfico o una pronunciación extranjera de la URL. Ejemplo: ejemple.com
+- Un error tipográfico. ejemlop.com
+- Una URL expresada diferente. ejemplos.com
+- Un TLD diferente. ejemplo.org
+- Un ccTLD diferente. ejemplo.co
 
 Una vez en el sitio web del typosquatter, el usuario puede ser engañado para que piense que están en el sitio web correcto a través del uso de logos similares o copiados, una interfaz de usuario o contenido similar, el fin de ello es el robo de información personal tal como contraseñas, tarjetas de crédito o la venta de productos y servicios1. En algunos casos pueden utilizar el phishing.
 
