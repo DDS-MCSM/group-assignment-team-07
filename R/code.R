@@ -1,25 +1,28 @@
- #' Title
-#'
-#' @details This are the details
-#' @return
-#' @export
-#'
-#' @examples
-sample_function <- function() {
-  print("Hello world")
-}
+if (!require(xml2)) (install.packages("xml2"))
 library("xml2")
+if (!require(httr)) (install.packages("httr"))
 library("httr")
+if (!require(reticulate)) (install.packages("reticulate"))
 library("reticulate")
+if (!require(curl)) (install.packages("curl"))
 library("curl")
+if (!require(magrittr)) (install.packages("magrittr"))
 library("magrittr")
+if (!require(tidyr)) (install.packages("tidyr"))
 library("tidyr")
+if (!require(dplyr)) (install.packages("dplyr"))
 library("dplyr")
 
 domains_df <<- data.frame(Domain = character(), Has_certificate = logical() , Organization = character(), Is_reliable = logical(), Resolves = logical())
 non_domains_df <<- list()
 reliable_organization <<- ""
 
+#' domain_exists
+#'
+#' @details Check if a domain exists
+#' @return logical value
+#' @export
+#'
 domain_exists <- function(domain_to_check){
   tryCatch({
     print(paste("Checking if ", domain_to_check, " exists..." ,sep = ""))
@@ -32,6 +35,13 @@ domain_exists <- function(domain_to_check){
   })
 }
 
+
+#' main
+#'
+#' @details Main function of the program. Does the accquisition, the data manipulation and generates the view
+#' @return .
+#' @export
+#'
 main <- function(domain){
   domains_df <<- data.frame(Domain = character(), Has_certificate = logical() , Organization = character(), Is_reliable = logical(), Resolves = logical())
   non_domains_df <<- list()
@@ -53,7 +63,6 @@ main <- function(domain){
 
   pool <- new_pool()
   cb <- function(req){
-    print("Entered done function")
     domains_df <<- rbind(domains_df, get_organization_certificate_info(req$content,known_as_reliable = FALSE))
     print(domains_df)
   }
@@ -69,11 +78,16 @@ main <- function(domain){
   }
    out <- multi_run(pool = pool)
    out
+   draw_pie(domains_df)
 }
 
 
-## FUNCTION get_sslshopper certficate info -----------------------------------------------------
-
+#' get_organization_certificate_info
+#'
+#' @details Gets the certificate information of a domain
+#' @return Data frame with one row containing information of the domain certificate
+#' @export
+#'
 get_organization_certificate_info <- function(response, known_as_reliable){
   organization <- character(0)
   sslshopper_html <- read_html(response)
@@ -111,6 +125,12 @@ get_organization_certificate_info <- function(response, known_as_reliable){
   return(result)
 }
 
+#' draw_pie
+#'
+#' @details Generates the view of the data
+#' @return .
+#' @export
+#'
 draw_pie <- function(df) {
 
   number_of_domanis = nrow(df)
@@ -129,83 +149,23 @@ draw_pie <- function(df) {
   print(not_resolving_domains)
 
 
-  pie(x=c(not_resolving_domains),labels="", radius=1 , col=c("#cc0000"), main = "Some main")
-  text(0, 1, "init.angle = 90", col = "red")
-  par(new=TRUE)
-  r1 <- 1-(not_resolving_domains/number_of_domanis)
-  pie(x=c(not_reliable_without_certificate_domains),radius=(r1),
-      col=c("#e59400"))
+  pie(x=not_resolving_domains,labels=not_resolving_domains, radius=1 , col=c("#cc0000"), main = "Some main")
 
+  par(new=TRUE)
+
+  r1 <- 1-(not_resolving_domains/number_of_domanis)
+  pie(x=not_reliable_without_certificate_domains, labels=not_reliable_without_certificate_domains,radius=(r1),col=c("#e59400"), init.angle = 90)
+
+  par(new=TRUE)
 
   r2 <- r1-(not_reliable_without_certificate_domains/number_of_domanis)
+  pie(x=not_reliable_certificate_domains, labels= not_reliable_certificate_domains, radius=(r2), col=c("#e5e500"), init.angle=45)
+
   par(new=TRUE)
-  pie(x=c(not_reliable_certificate_domains),radius=(r2),
-      col=c("#e5e500"))
 
   r3 <- r2 - (not_reliable_certificate_domains/number_of_domanis)
-  par(new=TRUE)
-  pie(x=c(reliable_domains),radius=(r3),
-      col=c("#198c19"))
+  pie(x=reliable_domains,labels = reliable_domains, radius=(r3), col=c("#198c19"), init.angle = 180)
 
-  legend(1, .4, c("DH"), cex = 1, fill = c("#198c19"))
+  legend(1.2, 1, c("Not resolved domains","Domains without certificate","Domains with certificate","Reliable domains"), cex = 1, fill = c("#cc0000","#e59400","#e5e500","#198c19"))
 
-  y1_2 <- 1 - (not_resolving_domains/number_of_domanis)
-  y1_1 <- (not_resolving_domains/number_of_domanis)
-  y2_2 <- y1_2 - (not_reliable_without_certificate_domains/number_of_domanis)
-  y2_1 <- y1_1 + (not_reliable_without_certificate_domains/number_of_domanis)
-  y3_2 <- y2_2 - (not_reliable_certificate_domains/number_of_domanis)
-  y3_1 <- y2_1 + (not_reliable_certificate_domains/number_of_domanis)
-  y4_2 <- y3_2 - (reliable_domains/number_of_domanis)
-  y4_1 <- y3_1 + (reliable_domains/number_of_domanis)
-
-
-  plot_ly(df,labels = c("not_resolving_domains"), values = c(not_resolving_domains),
-          showlegend = TRUE,
-          name = "Continent Data0") %>%
-
-    add_pie(hole = 0,
-            textinfo = 'label',
-            textposition = 'inside',
-            insidetextfont = list(color = '#FFFFFF'),
-            marker = list(line = list(color = '#FFFFFF', width = 1)),
-            direction = 'clockwise',
-            sort = FALSE,
-            text = ~paste(c("not_resolving_domains"), c(not_resolving_domains)),
-            hoverinfo = 'text + percent') %>%
-
-
-    add_pie(df,labels = c("not_reliable_without_certificate_domains"), values = c(not_reliable_without_certificate_domains),
-            textinfo = 'label',
-            textposition = 'inside',
-            direction = 'clockwise',
-            sort = FALSE,
-            name = "Continent Data1",
-            marker = list(line = list(color = '#FFFFFF', width = 1)),
-            domain = list(x = c(0,1), y = c(y1_1,y1_2))) %>%
-
-    add_pie(df,labels = c("not_reliable_certificate_domains"), values = c(not_reliable_certificate_domains),
-            textinfo = 'label',
-            textposition = 'inside',
-            direction = 'clockwise',
-            sort = FALSE,
-            name = "Continent Data1",
-            marker = list(line = list(color = '#FFFFFF', width = 1)),
-            domain = list(x = c(.2, 0.8), y = c(y2_1,y2_2))) %>%
-
-    add_pie(df,labels = c("Reliable domains"), values = c(reliable_domains),
-            textinfo = 'label',
-            textposition = 'inside',
-            direction = 'clockwise',
-            sort = FALSE,
-            name = "Continent Data1",
-            marker = list(line = list(color = '#FFFFFF', width = 1)),
-            domain = list(x = c(.2, 0.8), y = c(y3_1,y3_2))) %>%
-
-
-    config(collaborate = TRUE, displaylogo = TRUE ) %>%
-
-    layout(title = "Band Locations",
-           xaxis = list(showgrid = TRUE, zeroline = TRUE, showticklabels = TRUE),
-           yaxis = list(showgrid = TRUE, zeroline = TRUE, showticklabels = TRUE),
-           autosize = TRUE)
 }
