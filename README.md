@@ -96,7 +96,7 @@ Un sello de confianza es un logotipo que puede mostrar en su sitio web y que ver
 
 ### Objetivos
 
-Para la realización del proyecto ANTI-TYPOSQUATTING, hemos trazado dos tipos de objetivos, que serán los objetivos técnicos y los objetivos fundamentado en el Análisis avanzado de Datos. Ambos objetivos enfocados en la ciberseguridad.
+Para la realización del proyecto ANTI-TYPOSQUATTING, hemos trazado dos tipos de objetivos, que serán los objetivos técnicos y los objetivos basados en el Análisis avanzado de Datos. Ambos objetivos enfocados en la ciberseguridad.
 
 Objetivos Técnicos:
 
