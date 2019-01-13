@@ -2,7 +2,7 @@
 
 Group Assignment base repository for the Data Driven Security subject of the [CyberSecurity Management Msc](https://www.talent.upc.edu/ing/professionals/presentacio/codi/221101/cybersecurity-management/).
 
-## Proyecto "ANTI-TYPOSQUATTING" 
+## Proyecto ANTI-TYPOSQUATTING
 
 El Phishing hoy en día, es uno de los principales riesgos a los que están expuestos los usuarios incautos. Consideremos las altas probabilidades de caer en este tipo de ataques. El Phishing o suplantación de identidad es un método utilizado por los Ciberdelincuentes para engañar a los usuarios y robar información, como por ejemplo números de tarjetas de crédito, contraseñas, cuentas bancarias, en resumen, cualquier información personal o corporativa que pueda ser sensible para cualquier individuo o compañía y cuyo su uso indebido representaría perjuicios económicos o personales serios.
 
