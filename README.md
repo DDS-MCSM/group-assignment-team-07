@@ -11,10 +11,15 @@ Como bien mencionamos el método Phishing, es un problema grave para los propiet
 De esta problemática nace el presente proyecto llamado ANTI-TYPOSQUATTING.
 
 
-### Requirements
+### Requerimientos
 
-  - Requirement 1
-  - Requirement 2
+Los requerimientos clave para ejecución del presente proyecto son:
+1.	Equipo de trabajo: Ingeniero desarrollador con habilidades en Hacking e Ingeniero Especialista en Análisis y estrategia de Cybersecurity.
+2.	Herramientas técnicas: 
+-	Integrated Development Environment (IDE) para el desarrollo del proyecto
+-	Software de control de versiones
+-	Soluciones o herramientas para validación de nombres de Dominio.
+
   
   
 ### Project Description
