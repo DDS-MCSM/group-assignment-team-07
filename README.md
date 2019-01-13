@@ -118,23 +118,23 @@ A continuación, veremos las diferentes tipificaciones, fuentes heterogéneas, c
 Etapa inicial 
 Tomamos la muestra de un nombre de dominio conocido o de interés para el cual deseamos aplicar el presente proyecto, en este caso será el nombre de dominio que queremos proteger. Para esto y después de un análisis de las diferentes soluciones web que nos permiten tener información completa ,en la mayoría de los casos, hemos seleccionado el sitio https://www.sslshopper.com , este sitio web permite extraer información clave sobre el certificado y el propietario del dominio web, para el presente proyecto será relevante el nombre de la organización propietaria,  ya que será la llave primaria para establecer cuando un nombre de dominio es o no de un propietario de confianza o del mismo propietario dueño del dominio principal en mención. Después de extraer la información relevante sobre el certificado del dominio, se aplicará el algoritmo desarrollado para poder generar variaciones del dominio tal y como lo haría un criminal cibernético.
 
-Caso # 1
+- Caso # 1
 
 Si el dominio posee certificado y el propietario del dominio generado es igual al propietario del dominio original, se considera riesgo bajo o nulo para un ataque de Phishing de dicho dominio.
 
-Caso # 2
+- Caso # 2
 
 Si el dominio posee certificado y el propietario del dominio generado es diferente al propietario del dominio original, se considera riesgo bajo, ya que el dominio posee un propietario que es verificable.
 
-Caso # 3
+- Caso # 3
 
 Si el dominio posee certificado y pero no se puede obtener información sobre el propietario de dicho certificado , hacemos uso de otra fuente de validación diferente, a través del sitio web https://www.ultratools.com/tools/ipWhoisLookupResult ,este sitio web nos será de utilidad para validar este tipo de casos, consultamos su IP y si el propietarios de dicha IP es el mimos propietario del dominio original, en este caso se considera riesgo bajo.
 
-Caso # 4
+- Caso # 4
 
 Si el dominio posee certificado y pero no se puede obtener información sobre el propietario de dicho certificado , hacemos uso de otra fuente de validación diferente, a través del sitio web https://www.ultratools.com/tools/ipWhoisLookupResult ,este sitio web nos será de utilidad para validar este tipo de casos, consultamos su IP y si el propietarios de dicha IP es diferente al propietario del dominio original, en este caso se considera riesgo alto. Ya que este dominio puede ser utilizado con fines fraudulentos.
 
-Caso # 5
+- Caso # 5
 
 Por ultimo si el dominio no posee certificado y su IP asociada no tiene un propietario se considera de un riesgo muy Alto y cualquier persona podría utilizar dicho dominio para llevar a cabo una Phishing o uno de sus métodos variantes.
 
