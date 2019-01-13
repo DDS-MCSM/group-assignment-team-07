@@ -55,6 +55,7 @@ Ejemplos
 Desde 2006 existe una variante considerada como phishing/fraude de Google llamada "Goggle.com", entre 2011 y 2012 la URL redirigía al sitio web de Google.2 Mientras que un chequeo en 2019 revelo que el sitio web solo muestra las palabras "Goggle.com Inc.". Otro ejemplo del typosquatting es yuube.com tarjeteando a usuarios de YouTube, esta página redirigía a los usuarios a un sitio web malicioso que pedía a los usuarios que instalaran una extensión de seguridad a su navegador que era en realidad malware.3
 Usuarios intentando visitar el sitio web del famoso juego de navegador Agar.io pueden haber cometido un error tipográfico en la URL llevándolos a agor.io. Visitar el sitio producía un jumpscare del famoso creepypasta Jeff the Killer. El sitio fue derribado en 2017.
 
+Teniendo en cuenta esto una de las formas o la forma más efectiva de proteger los dominios de errores de escritura, es registrar los posibles nombres con faltas de ortografía o con variaciones antes que los ciberdelincuentes tengan la oportunidad de hacerlo.
 
 ### Goals
 
