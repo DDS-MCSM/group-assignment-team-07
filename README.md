@@ -55,7 +55,44 @@ Ejemplos
 Desde 2006 existe una variante considerada como phishing/fraude de Google llamada "Goggle.com", entre 2011 y 2012 la URL redirigía al sitio web de Google.2 Mientras que un chequeo en 2019 revelo que el sitio web solo muestra las palabras "Goggle.com Inc.". Otro ejemplo del typosquatting es yuube.com tarjeteando a usuarios de YouTube, esta página redirigía a los usuarios a un sitio web malicioso que pedía a los usuarios que instalaran una extensión de seguridad a su navegador que era en realidad malware.3
 Usuarios intentando visitar el sitio web del famoso juego de navegador Agar.io pueden haber cometido un error tipográfico en la URL llevándolos a agor.io. Visitar el sitio producía un jumpscare del famoso creepypasta Jeff the Killer. El sitio fue derribado en 2017.
 
-Teniendo en cuenta los precedentes, una de las formas o la forma más efectiva de proteger los dominios de errores de escritura o alteraciones de su nombre de dominio para un uso fraudulento, es registrar los posibles nombres con faltas de ortografía o con variaciones antes que los ciberdelincuentes tengan la oportunidad de hacerlo.
+Teniendo en cuenta esto una de las formas o la forma más efectiva de proteger los dominios de errores de escritura, es registrar los posibles nombres con faltas de ortografía o con variaciones antes que los ciberdelincuentes tengan la oportunidad de hacerlo.
+
+Para complementar vamos a conocer información relevante que puede someterse a juicio y análisis para el desarrollo de los objetivos del presente proyecto:
+
+¿Qué es SSL? SSL significa Secure Sockets Layer, una tecnología de cifrado creada originalmente por Netscape en la década de 1990. SSL crea una conexión cifrada entre su servidor web y el navegador web de sus visitantes, lo que permite que la información privada se transmita sin los problemas de escuchas, manipulación de datos y falsificación de mensajes.
+
+Para habilitar SSL en un sitio web, deberá obtener un certificado SSL que lo identifique e instalarlo en su servidor web. Cuando un navegador web utiliza un certificado SSL, generalmente muestra un icono de candado, pero también puede mostrar una barra de direcciones verde. Una vez que haya instalado un certificado SSL, puede acceder a un sitio de forma segura cambiando la URL de http: // a https: //. Si SSL se implementa correctamente, la información transmitida entre el navegador web y el servidor web (ya sea información de contacto o de tarjeta de crédito) se cifra y solo la ve la organización propietaria del sitio web.
+
+Millones de negocios en línea utilizan certificados SSL para proteger sus sitios web y permiten que sus clientes confíen en ellos. Para utilizar el protocolo SSL, un servidor web requiere el uso de un certificado SSL. Los certificados SSL son proporcionados por las Autoridades de Certificación (CA).
+
+SSL vs. TLS
+
+SSL y TLS generalmente significan lo mismo. TLS 1.0 fue creado por RFC 2246 en enero de 1999 como la próxima versión de SSL 3.0. La mayoría de las personas están familiarizadas con el término SSL, por lo que suele ser el término que se usa cuando el sistema utiliza el protocolo TLS más reciente.
+
+¿Por qué necesito SSL?
+
+SSL ayuda a evitar que intrusos o compañías intrusivas, como los ISP, manipulen los datos enviados entre sus sitios web y los navegadores de sus usuarios. Es fundamental para proteger la información confidencial, como los números de las tarjetas de crédito, pero también protege su sitio del malware y evita que otros inyecten anuncios en sus recursos. Lea nuestra página de por qué SSL es necesario para obtener más información.
+
+¿Qué es una autoridad de certificación (CA)?
+
+Una autoridad de certificación es una entidad que emite certificados digitales a organizaciones o personas después de validarlos. Las autoridades de certificación deben mantener registros detallados de lo que se ha emitido y de la información utilizada para emitirlo, y se auditan periódicamente para asegurarse de que están siguiendo los procedimientos definidos. Cada autoridad de certificación proporciona una Declaración de Prácticas de Certificación (CPS) que define los procedimientos que se utilizarán para verificar las aplicaciones. Hay muchas CA comerciales que cobran por sus servicios (VeriSign). Las instituciones y los gobiernos pueden tener sus propias CA, y también hay Autoridades de Certificación gratuitas.
+
+Cada autoridad de certificación tiene diferentes productos, precios, características de certificado SSL y niveles de satisfacción del cliente. Obtenga más información sobre cómo elegir un proveedor de certificados o lea nuestras reseñas de certificados SSL para encontrar el mejor proveedor para comprar.
+
+¿Qué es la compatibilidad del navegador?
+
+El certificado que compre para asegurar su sitio web debe estar firmado digitalmente por otro certificado que ya se encuentre en el almacén confiable del navegador web de su usuario. Al hacer esto, el navegador web automáticamente confiará en su certificado porque es emitido por alguien en quien ya confía. Si no está firmado por un certificado raíz de confianza, o si faltan enlaces en la cadena de certificados, entonces el navegador web mostrará un mensaje de advertencia que indica que es posible que el sitio web no sea de confianza.
+
+Por lo tanto, la compatibilidad del navegador significa que el certificado que usted compra está firmado por un certificado raíz que ya es de confianza para la mayoría de los navegadores web que pueden estar usando sus clientes. A menos que se indique lo contrario, los certificados de todos los principales proveedores de certificados que figuran en SSL Shopper son compatibles con el 99% de todos los navegadores. Para obtener más detalles sobre un proveedor de certificados específico, consulte Compatibilidad con certificados SSL.
+
+¿Cuántos nombres de dominio puedo asegurar?
+
+La mayoría de los certificados de servidor SSL solo asegurarán un único nombre de dominio o subdominio. Por ejemplo, un certificado podría asegurar www.yourdomain.com o mail.yourdomain.com pero no ambos. El certificado seguirá funcionando con un nombre de dominio diferente, pero el navegador web dará un error cada vez que vea que la dirección en la barra de direcciones no coincide con el nombre de dominio (llamado un nombre común) en el certificado. Si necesita proteger varios subdominios en un solo nombre de dominio, puede comprar un certificado comodín. Para un certificado comodín, un nombre común de * .yourdomain.com aseguraría www.yourdomain.com, mail.yourdomain.com, secure.yourdomain.com, etc ... También hay certificados especiales como Unified Communications (UC) Certificados que pueden asegurar varios nombres de dominio diferentes en un certificado.
+
+¿Qué es un sello de confianza?
+
+Un sello de confianza es un logotipo que puede mostrar en su sitio web y que verifica que un proveedor de certificados en particular lo ha validado y está utilizando su certificado SSL para proteger su sitio. Se puede mostrar en páginas seguras y no seguras y es más apropiado en páginas donde los clientes están por ingresar su información personal, como una página de carrito de la compra, pero se pueden mostrar en cada página para ayudar a generar confianza. El sello de confianza de cada autoridad de certificación es diferente y algunos parecen más profesionales, por lo que debe considerar cómo se ve el sello para maximizar la confianza del cliente. Para obtener más información sobre Trust Seals, lea Gain Trust Online con Trust Seals.
+
 
 ### Goals
 
