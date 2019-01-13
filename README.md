@@ -106,6 +106,11 @@ Objetivos Técnicos:
 
 Objetivos de Análisis de Datos:
 
+-	¿Cuáles serían los márgenes o niveles de riesgo que podrían tener un dominio con sus variaciones?
+-	¿Cuáles son las tipificaciones comunes de lo nombres de dominio, existe un patrón común en todas las muestras?
+-	¿Puedo deducir que media o promedio de dominios tendría que adquirir para reducir la probabilidad de recibir un ataque de Phishing?
+
+
 ### Data acquisition
 
 ### Cleansing and transformations
